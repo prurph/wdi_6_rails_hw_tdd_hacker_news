@@ -6,7 +6,7 @@ While Hacker News is written in Lisp, we're going to write our own version of Ha
 
 ### Assignment
 
-Create Hacker News using TDD to test your models, and BDD to create the rest of the application. Use Alex's diagram for flow if there's any question about the order of building things.
+Create Hacker News using TDD to test your models, and BDD to create the rest of the application. Use [Alex's diagram for flow](https://s3.amazonaws.com/uploads.hipchat.com/39979/603929/vaCfHpZoRkK2u3N/tddrails.png) if there's any question about the order of building things.
 
 There are two notable parts that we do **not** need to implement:
 
