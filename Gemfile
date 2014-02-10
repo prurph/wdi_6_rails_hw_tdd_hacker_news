@@ -10,6 +10,10 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 1.2'
 gem 'devise'
 
+gem 'bootstrap-sass', '~>3.1.0'
+gem "flat-ui-rails"
+gem 'jquery-ui-rails'
+
 # These are gems you may find useful for testing
 # I have NOT created configuration in the /spec directory for you
 # You'll have to refer to your notes for spec_helper configuration
@@ -27,7 +31,7 @@ group :development, :test do
   gem 'guard-rspec', require: false
   gem 'pry-rails'
   gem 'pry-nav'
-  gem 'pry-stack-explorer'
+  gem 'pry-stack_explorer'
 end
 
 # Other gems you may find useful for development
