@@ -1,7 +1,12 @@
 class CommentsController < ApplicationController
   def new
-    @comment = Comment.new
-    @story = get_story
+    if current_user
+      @comment = Comment.new
+      @story = get_story
+    else
+      flash[:alert] = "Please log in to comment"
+      redirect_to stories_path
+    end
   end
 
   def create
@@ -15,7 +20,7 @@ class CommentsController < ApplicationController
       story.comments << comment
       redirect_to story
     else
-      flash[:error] = comment.errors.full_messages.join(", ")
+      flash[:alert] = comment.errors.full_messages.join(", ")
       render :new
     end
   end

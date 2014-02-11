@@ -78,9 +78,14 @@ feature "manage articles" do
 
   scenario "user doesn't log in and tries to submit article" do
     visit root_path
-
     click_on "Submit"
-
     expect(page).to have_content("Please log in")
+  end
+
+  scenario "user doesn't log in and tries to comment" do
+    visit root_path
+    first(".story").click_link("discuss")
+    expect(page).to have_content("Please log in")
+
   end
 end
