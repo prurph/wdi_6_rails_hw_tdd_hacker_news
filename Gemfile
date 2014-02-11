@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.0.2'
-gem 'rails_12factor'
 gem 'pg'
 gem 'dotenv-rails'
 gem 'sass-rails', '~> 4.0.0'
@@ -52,4 +51,8 @@ group :development do
   gem 'rails_best_practices', require: false
   gem 'rails-footnotes'
   gem 'smusher'
+end
+
+group :production do
+  gem 'rails_12factor'
 end
