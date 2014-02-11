@@ -2,10 +2,12 @@ require "spec_helper"
 
 feature "manage articles" do
   background do
+    @creator = User.create(email: "hi@example.com", username: "creator",
+      password: "foobar56", password_confirmation: "foobar56")
     @story = Story.create(title: "Lorem", description: "Ipsum",
-      link: "http://www.google.com", user_id: 1)
+      link: "http://www.google.com", user_id: @creator.id)
     @story2 = Story.create(title: "Morem", description: "Ipmas",
-      link: "http://www.reddit.com", user_id: 2)
+      link: "http://www.reddit.com", user_id: @creator.id)
     @story_hash = { title: "Loremore", description: "Ipmuch",
       link: "http://www.peatarian.com" }
   end
@@ -56,5 +58,16 @@ feature "manage articles" do
     sign_up_with("jdoe55@example.com", "jdoe55", "foobar55")
     comment_on_first_with("My great first comment")
 
+    visit story_path(@story2)
+    expect(page).to have_content("My great first comment")
+  end
+
+  scenario "user upvotes story" do
+    visit root_path
+    sign_up_with("jdoe55@example.com", "jdoe55", "foobar55")
+    first(".story").click_link("Upvote")
+
+    save_and_open_page
+    expect(page).to have_content("1 point")
   end
 end

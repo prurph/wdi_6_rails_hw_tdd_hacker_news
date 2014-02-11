@@ -1,6 +1,9 @@
 HackerNews::Application.routes.draw do
 
   devise_for :users
+
+  post '/story/upvote/:id', to: 'stories#upvote', as: 'story_upvote'
+
   resources :stories do
     resources :comments, only: [:new, :create]
   end

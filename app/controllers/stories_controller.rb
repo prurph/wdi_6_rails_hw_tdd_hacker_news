@@ -1,6 +1,6 @@
 class StoriesController < ApplicationController
   def index
-    @stories = Story.all
+    @stories = Story.order(created_at: :desc)
   end
 
   def show
@@ -9,6 +9,12 @@ class StoriesController < ApplicationController
 
   def new
     @story = Story.new
+  end
+
+  def upvote
+    @story = Story.find(params[:id])
+    @story.update_attributes(points: @story.points + 1)
+    redirect_to stories_path
   end
 
   def create
