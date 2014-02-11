@@ -17,7 +17,7 @@ require 'spec_helper'
 #   scenario "user signs in" do
 #     click_on "Logout"
 
-#     sign_in_as("jdoe55@example.com", "foobar55")
+#     sign_in_with("jdoe55@example.com", "foobar55")
 #     expect(page).to have_content("Signed in successfully.")
 #   end
 # end

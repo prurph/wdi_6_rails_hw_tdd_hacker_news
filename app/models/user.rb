@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
-  validates :username, :email, presence: true
-  validates :username, :email, uniqueness: true
+  validates :username, uniqueness: true
   has_many :stories
   has_many :comments
   # Include default devise modules. Others available are:

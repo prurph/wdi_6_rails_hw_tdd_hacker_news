@@ -22,6 +22,7 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, type: :controller
   config.include Features::SessionHelpers, type: :feature
   config.include Features::StoryHelpers, type: :feature
+  config.include FactoryGirl::Syntax::Methods
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
