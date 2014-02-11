@@ -1,0 +1,11 @@
+<h1>Top Stories</h1>
+<%= link_to "Submit", new_story_path %>
+<ol>
+  <% @stories.each do |story| %>
+    <li class="story">
+      <%= link_to story.title, url_for(story.link), target: "_blank" %><br>
+      <%= story.description %>
+      <%= link_to "discuss", new_story_comment_path(story.id) %>
+    </li>
+  <% end %>
+</ol>

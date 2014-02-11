@@ -1,0 +1,9 @@
+<%= @story.title %>
+<ul>
+  <%= @story.comments.each do |comment| %>
+    <li>
+      <%= comment.body %><br>
+      by <%= comment.user.username %>
+    </li>
+  <% end %>
+</ul>

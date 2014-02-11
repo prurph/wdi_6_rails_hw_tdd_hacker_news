@@ -1,7 +1,11 @@
 HackerNews::Application.routes.draw do
 
   devise_for :users
-  root 'users#index'
+  resources :stories do
+    resources :comments, only: [:new, :create]
+  end
+
+  root 'stories#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

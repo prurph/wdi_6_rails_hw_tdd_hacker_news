@@ -10,5 +10,6 @@ describe User do
 
   describe "associations" do
     it { should have_many :stories }
+    it { should have_many :comments }
   end
 end
