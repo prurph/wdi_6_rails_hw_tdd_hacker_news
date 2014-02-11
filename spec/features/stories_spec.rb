@@ -69,23 +69,22 @@ feature "manage articles" do
     expect(page).to have_content("1 point")
   end
 
-  scenario "user doesn't log in and tries to upvote" do
-    visit root_path
-    first(".story").click_link("Upvote")
-    expect(page).to_not have_content("1 point")
-    expect(page).to have_content("Please log in")
-  end
-
-  scenario "user doesn't log in and tries to submit article" do
-    visit root_path
-    click_on "Submit"
-    expect(page).to have_content("Please log in")
-  end
-
-  scenario "user doesn't log in and tries to comment" do
-    visit root_path
-    first(".story").click_link("discuss")
-    expect(page).to have_content("Please log in")
-
+  context "user doesn't log in" do
+    scenario "user tries to upvote" do
+      visit root_path
+      first(".story").click_link("Upvote")
+      expect(page).to_not have_content("1 point")
+      expect(page).to have_content("Please log in")
+    end
+    scenario "user tries to submit article" do
+      visit root_path
+      click_on "Submit"
+      expect(page).to have_content("Please log in")
+    end
+    scenario "user tries to comment" do
+      visit root_path
+      first(".story").click_link("discuss")
+      expect(page).to have_content("Please log in")
+    end
   end
 end
