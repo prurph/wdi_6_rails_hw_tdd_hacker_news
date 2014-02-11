@@ -17,8 +17,20 @@
   <%= flash[:alert] %>
 </p>
 
+<nav>
+  <ul>
+    <% if user_signed_in? %>
+      <li>Signed in as <%= current_user.email %></li>
+      <li><%= link_to "Sign out", root_path %></li>
+    <% else %>
+      <li><%= link_to "Sign in", new_user_session_path %></li>
+      <li><%= link_to "Sign up", new_user_registration_path %></li>
+    <% end %>
+  </ul>
+</nav>
+
 
 <%= yield %>
-<%= render 'layouts/user_widget' %>
+<%#= render 'layouts/user_widget' %>
 </body>
 </html>

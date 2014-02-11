@@ -1,7 +1,8 @@
 module Features
   module SessionHelpers
     def sign_up_with(email, username, password)
-      visit new_user_registration_path
+      visit root_path
+      click_on "Sign up"
       fill_in "Email", with: email
       fill_in "Username", with: username
       fill_in "Password", with: password
