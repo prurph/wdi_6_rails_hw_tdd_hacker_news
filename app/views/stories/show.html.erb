@@ -1,9 +1,8 @@
 <%= @story.title %> posted by <%= @story.user.username %>
 <ul>
-  <%= @story.comments.each do |comment| %>
+  <% @story.comments.each do |comment| %>
     <li>
-      <%= comment.body %><br>
-      by <%= comment.user.username %>
+      <%= comment.user.username %> says: <%= comment.body %><br>
     </li>
   <% end %>
 </ul>

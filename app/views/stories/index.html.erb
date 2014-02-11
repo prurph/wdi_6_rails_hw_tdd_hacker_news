@@ -8,7 +8,7 @@
           <li class="story">
             <%= link_to story.title, url_for(story.link), target: "_blank" %><br>
             <%= story.description %>
-            <%= link_to "discuss", new_story_comment_path(story.id) %>
+            <%= link_to "discuss (#{pluralize(story.comments.count, 'comment')})", new_story_comment_path(story.id) %>
             <%= link_to "Upvote", story_upvote_path(story.id), { method: :post } %>
             <%= pluralize(story.upvotes.count, 'point') %>
           </li>
