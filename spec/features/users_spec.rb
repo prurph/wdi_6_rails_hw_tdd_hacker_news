@@ -50,7 +50,14 @@ feature "visitor signs in" do
 
     expect(page).to have_content 'Signed in successfully'
     expect(page).to have_link 'Sign out'
+  end
+end
 
+feature "user signs out" do
+  scenario "successfully" do
+    sign_up_with("jdoe55@example.com", "jdoe55", "foobar55")
+    click_on "Sign out"
+    expect(page).to have_content("Signed out successfully.")
   end
 end
 
