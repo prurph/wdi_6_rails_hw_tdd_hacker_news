@@ -22,48 +22,48 @@ require 'spec_helper'
 #   end
 # end
 
-feature "visitor signs up" do
-  scenario "successfully" do
-    sign_up_with("jdoe55@example.com", "jdoe55", "foobar55")
-    expect(page).to have_content("You have signed up successfully")
-  end
+# feature "visitor signs up" do
+#   scenario "successfully" do
+#     sign_up_with("jdoe55@example.com", "jdoe55", "foobar55")
+#     expect(page).to have_content("You have signed up successfully")
+#   end
 
-  scenario "unsuccessfully with blank fields" do
-    visit root_path
-    click_link 'Sign up'
-    click_button 'Sign up'
+#   scenario "unsuccessfully with blank fields" do
+#     visit root_path
+#     click_link 'Sign up'
+#     click_button 'Sign up'
 
-    expect(page).to_not have_content "Signed in"
-    expect(page).to have_content "can't be blank"
-  end
-end
+#     expect(page).to_not have_content "Signed in"
+#     expect(page).to have_content "can't be blank"
+#   end
+# end
 
-feature "visitor signs in" do
-  scenario "successfully" do
-    User.create!(email: 'bob@example.com', password: 'password', username: 'bob')
+# feature "visitor signs in" do
+#   scenario "successfully" do
+#     User.create!(email: 'bob@example.com', password: 'password', username: 'bob')
 
-    visit root_path
-    click_link 'Sign in'
-    fill_in 'Email', with: 'bob@example.com'
-    fill_in 'Password', with: 'password'
-    click_button 'Sign in'
+#     visit root_path
+#     click_link 'Sign in'
+#     fill_in 'Email', with: 'bob@example.com'
+#     fill_in 'Password', with: 'password'
+#     click_button 'Sign in'
 
-    expect(page).to have_content 'Signed in successfully'
-    expect(page).to have_link 'Sign out'
-  end
-end
+#     expect(page).to have_content 'Signed in successfully'
+#     expect(page).to have_link 'Sign out'
+#   end
+# end
 
-feature "user signs out" do
-  scenario "successfully" do
-    sign_up_with("jdoe55@example.com", "jdoe55", "foobar55")
-    click_on "Sign out"
-    expect(page).to have_content("Signed out successfully.")
-  end
-end
+# feature "user signs out" do
+#   scenario "successfully" do
+#     sign_up_with("jdoe55@example.com", "jdoe55", "foobar55")
+#     click_on "Sign out"
+#     expect(page).to have_content("Signed out successfully.")
+#   end
+# end
 
-feature "display stories" do
-  scenario "user visits homepage" do
-    visit root_path
-    expect(page).to have_content("Top Stories")
-  end
-end
+# feature "display stories" do
+#   scenario "user visits homepage" do
+#     visit root_path
+#     expect(page).to have_content("Top Stories")
+#   end
+# end
