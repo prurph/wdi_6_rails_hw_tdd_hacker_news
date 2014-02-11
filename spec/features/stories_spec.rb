@@ -26,7 +26,7 @@ feature "manage articles" do
     expect(page).to have_link(@story2.title, { href: @story2.link } )
   end
 
-  scenario "user can submit article" do
+  scenario "user submits article" do
     visit root_path
     sign_up_with("jdoe55@example.com", "jdoe55", "foobar55")
 
@@ -42,7 +42,7 @@ feature "manage articles" do
     expect(page).to have_link(@story_hash[:title], { href: @story_hash[:link] } )
   end
 
-  scenario "user can comment on article" do
+  scenario "user comments on article" do
     visit root_path
     sign_up_with("jdoe55@example.com", "jdoe55", "foobar55")
 
@@ -58,7 +58,7 @@ feature "manage articles" do
     sign_up_with("jdoe55@example.com", "jdoe55", "foobar55")
     comment_on_first_with("My great first comment")
 
-    visit story_path(@story2)
+    visit story_path(@story)
     expect(page).to have_content("My great first comment")
   end
 
@@ -66,8 +66,21 @@ feature "manage articles" do
     visit root_path
     sign_up_with("jdoe55@example.com", "jdoe55", "foobar55")
     first(".story").click_link("Upvote")
-
-    save_and_open_page
     expect(page).to have_content("1 point")
+  end
+
+  scenario "user doesn't log in and tries to upvote" do
+    visit root_path
+    first(".story").click_link("Upvote")
+    expect(page).to_not have_content("1 point")
+    expect(page).to have_content("Please log in")
+  end
+
+  scenario "user doesn't log in and tries to submit article" do
+    visit root_path
+
+    click_on "Submit"
+
+    expect(page).to have_content("Please log in")
   end
 end

@@ -1,20 +1,29 @@
 class StoriesController < ApplicationController
   def index
-    @stories = Story.order(created_at: :desc)
+    @stories = Story.order(points: :desc)
   end
 
   def show
-    @story = Story.find(params[:id])
+    @story = get_story
   end
 
   def new
-    @story = Story.new
+    if current_user
+      @story = Story.new
+    else
+      flash[:alert] = "Please log in to submit"
+      redirect_to stories_path
+    end
   end
 
   def upvote
-    @story = Story.find(params[:id])
-    upvote = Upvote.create(user_id: current_user.id, story_id: @story.id)
-    @story.upvotes << upvote
+    if current_user
+      @story = get_story
+      upvote = Upvote.create(user_id: current_user.id, story_id: @story.id)
+      @story.upvotes << upvote
+    else
+      flash[:alert] = "Please log in to upvote"
+    end
     redirect_to stories_path
   end
 
@@ -25,12 +34,15 @@ class StoriesController < ApplicationController
       flash[:notice] = "Article submitted"
       redirect_to root_path
     else
-      flash[:error] = new_story.errors.full_messages.join(", ")
-      render :new
+      flash[:alert] = new_story.errors.full_messages.join(", ")
+      redirect_to stories_path
     end
   end
 
   private
+  def get_story
+    Story.find(params[:id])
+  end
   def story_params
     params.require(:story).permit(:title, :description, :link)
   end
