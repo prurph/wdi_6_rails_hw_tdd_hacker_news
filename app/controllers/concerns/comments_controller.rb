@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   def new
-    if current_user
+    if user_signed_in?
       @comment = Comment.new
       @story = get_story
     else

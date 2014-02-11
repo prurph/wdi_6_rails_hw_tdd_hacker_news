@@ -8,7 +8,7 @@ class StoriesController < ApplicationController
   end
 
   def new
-    if current_user
+    if user_signed_in?
       @story = Story.new
     else
       flash[:alert] = "Please log in to submit"
@@ -17,7 +17,7 @@ class StoriesController < ApplicationController
   end
 
   def upvote
-    if current_user
+    if user_signed_in?
       @story = get_story
       upvote = Upvote.create(user_id: current_user.id, story_id: @story.id)
       @story.upvotes << upvote
