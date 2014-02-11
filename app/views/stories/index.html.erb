@@ -7,7 +7,7 @@
       <%= story.description %>
       <%= link_to "discuss", new_story_comment_path(story.id) %>
       <%= link_to "Upvote", story_upvote_path(story.id), { method: :post } %>
-      <%= pluralize(story.points, 'point') %>
+      <%= pluralize(story.upvotes.count, 'point') %>
     </li>
   <% end %>
 </ol>

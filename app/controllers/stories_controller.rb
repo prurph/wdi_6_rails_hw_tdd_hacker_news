@@ -13,7 +13,8 @@ class StoriesController < ApplicationController
 
   def upvote
     @story = Story.find(params[:id])
-    @story.update_attributes(points: @story.points + 1)
+    upvote = Upvote.create(user_id: current_user.id, story_id: @story.id)
+    @story.upvotes << upvote
     redirect_to stories_path
   end
 
