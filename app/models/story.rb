@@ -26,6 +26,8 @@ class Story < ActiveRecord::Base
   end
 
   def self.top_30
-    self.all.sort_by(&:hot).reverse[0,30]
+    Rails.cache.fetch("top_30", expires_in: 5.minutes) do
+      return self.all.sort_by(&:hot).reverse[0,30]
+    end
   end
 end
