@@ -11,4 +11,9 @@ class Comment < ActiveRecord::Base
     blk = lambda {|vote| vote.value}
     self.votes.to_a.sum(&blk)
   end
+
+  def user_voted_value(user_id)
+    value = self.votes.where(user_id: user_id).pluck(:value)
+    value.empty? ? 0 : value
+  end
 end

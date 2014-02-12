@@ -2,23 +2,31 @@
   <div class="row">
     <div class="col-lg-12">
       <h1>Top Stories</h1>
-      <%= link_to "Submit", new_story_path%>
+      <%= link_to "Submit", new_story_path %>
     </div>
   <div>
   <div class="row">
-    <ol class="list-group">
-      <% @stories.each do |story| %>
-        <li class="story list-group-item">
-          <div class="col-lg-12">
-            <%= link_to story.title, url_for(story.link), target: "_blank" %>
-            <%= story.description %>
-            <%= link_to "discuss (#{pluralize(story.comments.count, 'comment')})", story %>
-            <%= pluralize(story.vote_score, 'point') %>
-            <%= "#{story.hot} HOT SCORE" %><br>
-            <%= render partial: 'layouts/upvote_downvote', locals: {story: story} %>
+    <ul class="list-group">
+      <% @stories.each_with_index do |story, index| %>
+        <li class="story">
+          <div class="col col-lg-10">
+            <ul>
+              <li>
+                <%= link_to story.title, url_for(story.link), target: "_blank" %>
+                <%= story.description %>
+                <%= link_to "discuss (#{pluralize(story.comments.count, 'comment')})", story %>
+                <%= pluralize(story.vote_score, 'point') %>
+                <%= "#{story.hot} HOT SCORE" %>
+              </li>
+              <li>
+                <%# objs below allows same upvote/downvote for comment and articles %>
+                <%= render partial: 'layouts/upvote_downvote',
+                           locals: {objs: [story], user_vote: @user_vote[index] } %>
+              </li>
+            <ul>
           </div>
         </li>
       <% end %>
-    </ol>
+    </ul>
   </div>
 </div>

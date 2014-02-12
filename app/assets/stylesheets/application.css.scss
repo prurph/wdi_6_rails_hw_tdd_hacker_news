@@ -1,2 +1,10 @@
-@import 'bootstrap';
+@import "bootstrap";
 @import "flat-ui";
+
+ul {
+  list-style-type: none;
+}
+
+.vote a {
+  display: none;
+}

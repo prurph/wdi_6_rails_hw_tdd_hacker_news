@@ -63,7 +63,7 @@ feature 'User takes action' do
 
     scenario 'by upvoting story' do
       within('.story') do
-        click_on "Upvote"
+        find('.glyphicon-chevron-up').click
       end
       within('.story') do
         expect(page).to have_content(@story.title)
@@ -73,7 +73,7 @@ feature 'User takes action' do
 
     scenario 'by downvoting story' do
       within('.story') do
-        click_on "Downvote"
+        find('.glyphicon-chevron-down').click
       end
       within('.story') do
         expect(page).to have_content(@story.title)
@@ -81,18 +81,25 @@ feature 'User takes action' do
       end
     end
 
-    scenario 'by downvoting an already downvoted story' do
-      click_on "Downvote"
-      click_on "Downvote"
+    scenario 'no downvote button after downvoted' do
+      find('.glyphicon-chevron-down').click
 
       expect(page).to have_content(@story.title)
       expect(page).to have_content('-1 points')
-      expect(page).to_not have_content('-3 points')
+      expect(page).to_not have_content('.glyphicon-chevron-down')
+    end
+
+    scenario 'no upvote button after upvoted' do
+      find('.glyphicon-chevron-down').click
+
+      expect(page).to have_content(@story.title)
+      expect(page).to have_content('1 points')
+      expect(page).to_not have_content('.glyphicon-chevron-up')
     end
 
     scenario 'by upvoting a downvoted story' do
-      click_on "Downvote"
-      click_on "Upvote"
+      find('.glyphicon-chevron-down').click
+      find('.glyphicon-chevron-up').click
 
       expect(page).to have_content(@story.title)
       expect(page).to have_content('1 point')
@@ -108,7 +115,7 @@ feature 'User takes action' do
 
     scenario "user tries to upvote" do
       within('.story') do
-        click_on "Upvote"
+        find('.glyphicon-chevron-up').click
       end
       expect(page).to_not have_content("1 point")
       expect(page).to have_content("Please log in")
@@ -116,7 +123,7 @@ feature 'User takes action' do
 
     scenario "user tries to downvote" do
       within('.story') do
-        click_on "Downvote"
+        find('.glyphicon-chevron-down').click
       end
       expect(page).to_not have_content("1 point")
       expect(page).to have_content("Please log in")

@@ -6,14 +6,12 @@
         comment: @comment } %>
 
   <ul>
-    <% @story_comments.each do |comment| %>
+    <% @story_comments.each_with_index do |comment, index| %>
       <li>
         <%= comment.user.username %> says: <%= comment.body %><br>
-        <div class="btn-group">
-          <%= button_to "Upvote", [@story, comment, :upvote], { method: :post,
-                class: 'btn btn-success' } %>
-          <%= button_to "Downvote", [@story, comment, :downvote], { method: :post,
-                class: 'btn btn-danger' } %>
+        <div>
+          <%= render partial: 'layouts/upvote_downvote',
+                locals: { objs: [@story, comment], user_vote: @user_comm_vote[index] } %>
         </div>
         <%= pluralize(comment.vote_score, 'point') %>
       </li>

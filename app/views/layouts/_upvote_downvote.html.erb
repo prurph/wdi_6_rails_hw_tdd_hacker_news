@@ -1,6 +1,10 @@
 <div class="btn-group">
-  <%= link_to "Upvote", [story, :upvote],
-      { method: :post, class: 'btn btn-success' } %>
-  <%= link_to "Downvote", [story, :downvote],
-      { method: :post, class: 'btn btn-danger' } %>
+  <% if user_vote <= 0 %>
+    <%= link_to "", [objs, :upvote].flatten, { method: :post,
+          class: "btn btn-success vote glyphicon glyphicon-chevron-up" } %>
+  <% end %>
+  <% if user_vote >= 0 %>
+    <%= link_to "", [objs, :downvote].flatten, { method: :post,
+          class: "btn btn-danger vote glyphicon glyphicon-chevron-down" } %>
+  <% end %>
 </div>

@@ -30,4 +30,9 @@ class Story < ActiveRecord::Base
       return self.all.sort_by(&:hot).reverse[0,30]
     end
   end
+
+  def user_voted_value(user_id)
+    value = self.votes.where(user_id: user_id).pluck(:value)
+    value.empty? ? 0 : value
+  end
 end
