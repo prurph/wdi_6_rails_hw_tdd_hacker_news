@@ -28,6 +28,6 @@ class Story < ActiveRecord::Base
   end
 
   def self.top_30
-    self.all.sort_by(&:hot)[0,30]
+    self.all.sort_by(&:hot)[0,30].reverse
   end
 end
