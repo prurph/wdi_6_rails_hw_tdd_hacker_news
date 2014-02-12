@@ -13,9 +13,9 @@
             <%= link_to story.title, url_for(story.link), target: "_blank" %>
             <%= story.description %>
             <%= link_to "discuss (#{pluralize(story.comments.count, 'comment')})", story %>
-            <%= render partial: 'layouts/upvote_downvote', locals: {story: story} %>
             <%= pluralize(story.vote_score, 'point') %>
-            <%= "#{story.hot} HOT SCORE" %>
+            <%= "#{story.hot} HOT SCORE" %><br>
+            <%= render partial: 'layouts/upvote_downvote', locals: {story: story} %>
           </div>
         </li>
       <% end %>
