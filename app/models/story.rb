@@ -22,9 +22,7 @@ class Story < ActiveRecord::Base
       y = -1
     end
 
-    z = ( x.abs < 1 ? 1 : x.abs )
-    # This is the overall rating
-    Math.log(z) + y * self.created_at.to_i / 45000
+    Math.log([x.abs, 1].max, 10) + y * self.created_at.to_i / 45000
   end
 
   def self.top_30
