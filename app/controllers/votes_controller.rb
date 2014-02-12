@@ -1,10 +1,5 @@
 class VotesController < ApplicationController
-  # before_action :set_vote, only: [:show, :edit, :update, :destroy]
   before_action :set_votable
-
-  def new
-    @vote = Vote.new
-  end
 
   def upvote
     if user_signed_in?
@@ -16,10 +11,8 @@ class VotesController < ApplicationController
 
     if @vote.update_attributes(value: params[:value])
       flash[:notice] = "Upvoted!"
-      # redirect_to @votable.class
     else
       flash[:alert] = @vote.errors.full_messages.join(", ")
-      # redirect_to @votable.class || @votable.story
     end
     redirect_to :back
   end
@@ -34,10 +27,8 @@ class VotesController < ApplicationController
 
     if @vote.update_attributes(value: params[:value])
       flash[:notice] = "Downvoted!"
-      # redirect_to @votable.class
     else
       flash[:alert] = @vote.errors.full_messages.join(", ")
-      # redirect_to @votable.class
     end
     redirect_to :back
   end

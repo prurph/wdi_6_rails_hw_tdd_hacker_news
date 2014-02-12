@@ -63,7 +63,7 @@ feature 'User takes action' do
 
     scenario 'by upvoting story' do
       within('.story') do
-        click_button "Upvote"
+        click_on "Upvote"
       end
       within('.story') do
         expect(page).to have_content(@story.title)
@@ -73,12 +73,30 @@ feature 'User takes action' do
 
     scenario 'by downvoting story' do
       within('.story') do
-        click_button "Downvote"
+        click_on "Downvote"
       end
       within('.story') do
         expect(page).to have_content(@story.title)
         expect(page).to have_content('-1 points')
       end
+    end
+
+    scenario 'by downvoting an already downvoted story' do
+      click_on "Downvote"
+      click_on "Downvote"
+
+      expect(page).to have_content(@story.title)
+      expect(page).to have_content('-1 points')
+      expect(page).to_not have_content('-3 points')
+    end
+
+    scenario 'by upvoting a downvoted story' do
+      click_on "Downvote"
+      click_on "Upvote"
+
+      expect(page).to have_content(@story.title)
+      expect(page).to have_content('1 point')
+      expect(page).to_not have_content('-1 points')
     end
   end
 
@@ -90,7 +108,15 @@ feature 'User takes action' do
 
     scenario "user tries to upvote" do
       within('.story') do
-        click_button "Upvote"
+        click_on "Upvote"
+      end
+      expect(page).to_not have_content("1 point")
+      expect(page).to have_content("Please log in")
+    end
+
+    scenario "user tries to downvote" do
+      within('.story') do
+        click_on "Downvote"
       end
       expect(page).to_not have_content("1 point")
       expect(page).to have_content("Please log in")
@@ -102,6 +128,8 @@ feature 'User takes action' do
     end
     scenario "user tries to comment" do
       first(".story").click_link("discuss")
+      fill_in "Comment", with: "Sweet new comment!"
+      click_on "Comment!"
       expect(page).to have_content("Please log in")
     end
   end

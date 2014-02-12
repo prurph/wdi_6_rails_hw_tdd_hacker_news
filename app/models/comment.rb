@@ -8,6 +8,7 @@ class Comment < ActiveRecord::Base
   has_many :votes, as: :votable
 
   def vote_score
-    self.votes.sum{|vote| vote.value}
+    blk = lambda {|vote| vote.value}
+    self.votes.to_a.sum(&blk)
   end
 end

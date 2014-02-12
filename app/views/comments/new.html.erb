@@ -1,5 +1,2 @@
-<%= form_for [@story, @comment] do |f| %>
-  <%= f.label :body, "Comment" %>
-  <%= f.text_area :body %>
-  <%= f.submit "Comment!" %>
-<% end %>
+<%= render partial: 'layouts/new_comment_form', locals: {story: @story,
+      comment: @comment } %>

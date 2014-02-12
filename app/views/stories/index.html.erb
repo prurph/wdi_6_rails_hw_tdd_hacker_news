@@ -1,19 +1,23 @@
-<div class="container">
+<div class="container text-center">
   <div class="row">
-    <h1>Top Stories</h1>
-    <%= link_to "Submit", new_story_path%>
-    <ol>
+    <div class="col-lg-12">
+      <h1>Top Stories</h1>
+      <%= link_to "Submit", new_story_path%>
+    </div>
+  <div>
+  <div class="row">
+    <ol class="list-group">
       <% @stories.each do |story| %>
-        <div class="col-lg-12">
-          <li class="story">
-            <%= link_to story.title, url_for(story.link), target: "_blank" %><br>
+        <li class="story list-group-item">
+          <div class="col-lg-12">
+            <%= link_to story.title, url_for(story.link), target: "_blank" %>
             <%= story.description %>
-            <%= link_to "discuss (#{pluralize(story.comments.count, 'comment')})", new_story_comment_path(story.id) %>
-            <%= button_to "Upvote", [story, :upvote], method: :post %>
-            <%= button_to "Downvote", [story, :downvote], method: :post %>
+            <%= link_to "discuss (#{pluralize(story.comments.count, 'comment')})", story %>
+            <%= render partial: 'layouts/upvote_downvote', locals: {story: story} %>
             <%= pluralize(story.vote_score, 'point') %>
-          </li>
-        </div>
+            <%= "#{story.hot} HOT SCORE" %>
+          </div>
+        </li>
       <% end %>
     </ol>
   </div>

@@ -8,6 +8,26 @@ class Story < ActiveRecord::Base
   has_many :votes, as: :votable
 
   def vote_score
-    self.votes.sum{|vote| vote.value}
+    blk = lambda { |vote| vote.value }
+    self.votes.to_a.sum(&blk)
+  end
+
+  def hot
+    x = self.vote_score
+    if x > 0
+      y = 1
+    elsif x == 0
+      y = 0
+    else
+      y = -1
+    end
+
+    z = ( x.abs < 1 ? 1 : x.abs )
+    # This is the overall rating
+    Math.log(z) + y * self.created_at.to_i / 45000
+  end
+
+  def self.top_30
+    self.all.sort_by(&:hot)[0,30]
   end
 end

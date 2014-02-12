@@ -18,4 +18,10 @@ FactoryGirl.define do
     user
     story
   end
+
+  factory :vote do |vote|
+    user
+    vote.votable { |v| v.association(:story) }
+    value   { [-1, 0, 1].shuffle.first }
+  end
 end

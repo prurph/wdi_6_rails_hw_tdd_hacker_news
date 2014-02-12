@@ -1,10 +1,11 @@
 class StoriesController < ApplicationController
   def index
-    @stories = Story.order(points: :desc)
+    @stories = Story.top_30
   end
 
   def show
     @story = get_story
+    @comment = Comment.new
   end
 
   def new

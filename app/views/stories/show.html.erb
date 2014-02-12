@@ -1,5 +1,9 @@
 <%= @story.title %> posted by <%= @story.user.username %>
-<%= pluralize(@story.vote_score, 'point') %>
+<%= pluralize(@story.vote_score, 'point') %><br>
+<h3>Join the discussion</h3>
+<%= render partial: 'layouts/new_comment_form', locals: {story: @story,
+      comment: @comment } %>
+
 <ul>
   <% @story.comments.each do |comment| %>
     <li>

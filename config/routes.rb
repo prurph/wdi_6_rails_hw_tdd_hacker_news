@@ -14,9 +14,7 @@ HackerNews::Application.routes.draw do
 
   resources :stories do
     resources :comments do
-      #resources :votes, only: [:new, :create], defaults: {votable: 'comment'}
     end
-    #resources :votes, only: [:new, :create], defaults: {votable: 'story'}
   end
 
   root 'stories#index'
