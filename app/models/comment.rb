@@ -5,4 +5,9 @@ class Comment < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :story
+  has_many :votes, as: :votable
+
+  def vote_score
+    self.votes.sum{|vote| vote.value}
+  end
 end

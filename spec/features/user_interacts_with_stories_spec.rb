@@ -60,6 +60,26 @@ feature 'User takes action' do
       expect(page).to have_content(comment.body)
       expect(page).to have_content(@user.username)
     end
+
+    scenario 'by upvoting story' do
+      within('.story') do
+        click_button "Upvote"
+      end
+      within('.story') do
+        expect(page).to have_content(@story.title)
+        expect(page).to have_content('1 point')
+      end
+    end
+
+    scenario 'by downvoting story' do
+      within('.story') do
+        click_button "Downvote"
+      end
+      within('.story') do
+        expect(page).to have_content(@story.title)
+        expect(page).to have_content('-1 points')
+      end
+    end
   end
 
   context 'while not signed in' do
@@ -69,10 +89,13 @@ feature 'User takes action' do
     end
 
     scenario "user tries to upvote" do
-      first(".story").click_link("Upvote")
+      within('.story') do
+        click_button "Upvote"
+      end
       expect(page).to_not have_content("1 point")
       expect(page).to have_content("Please log in")
     end
+
     scenario "user tries to submit article" do
       click_on "Submit"
       expect(page).to have_content("Please log in")

@@ -1,8 +1,12 @@
 <%= @story.title %> posted by <%= @story.user.username %>
+<%= pluralize(@story.vote_score, 'point') %>
 <ul>
   <% @story.comments.each do |comment| %>
     <li>
       <%= comment.user.username %> says: <%= comment.body %><br>
+      <%= button_to "Upvote", [@story, comment, :upvote], method: :post %>
+      <%= button_to "Downvote", [@story, comment, :downvote], method: :post %>
+      <%= pluralize(comment.vote_score, 'point') %>
     </li>
   <% end %>
 </ul>

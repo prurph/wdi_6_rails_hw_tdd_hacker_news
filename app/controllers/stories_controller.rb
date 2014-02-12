@@ -16,17 +16,6 @@ class StoriesController < ApplicationController
     end
   end
 
-  def upvote
-    if user_signed_in?
-      @story = get_story
-      upvote = Upvote.create(user_id: current_user.id, story_id: @story.id)
-      @story.upvotes << upvote
-    else
-      flash[:alert] = "Please log in to upvote"
-    end
-    redirect_to stories_path
-  end
-
   def create
     new_story = Story.new(story_params)
     new_story.user_id = current_user.id

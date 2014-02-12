@@ -39,16 +39,6 @@ ActiveRecord::Schema.define(version: 20140211020858) do
 
   add_index "stories", ["user_id"], name: "index_stories_on_user_id", using: :btree
 
-  create_table "upvotes", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "story_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "upvotes", ["story_id"], name: "index_upvotes_on_story_id", using: :btree
-  add_index "upvotes", ["user_id"], name: "index_upvotes_on_user_id", using: :btree
-
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -68,5 +58,17 @@ ActiveRecord::Schema.define(version: 20140211020858) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
+
+  create_table "votes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "votable_id"
+    t.string   "votable_type"
+    t.integer  "value",        default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
+  add_index "votes", ["votable_id", "votable_type"], name: "index_votes_on_votable_id_and_votable_type", using: :btree
 
 end
