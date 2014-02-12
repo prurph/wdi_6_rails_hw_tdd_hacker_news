@@ -6,6 +6,7 @@ class StoriesController < ApplicationController
   def show
     @story = get_story
     @comment = Comment.new
+    @story_comments = @story.comments.order(:created_at)
   end
 
   def new

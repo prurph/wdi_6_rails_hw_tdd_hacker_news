@@ -1,15 +1,4 @@
 class CommentsController < ApplicationController
-  # Don't actually need this now (form just on article show page)
-  # def new
-  #   if user_signed_in?
-  #     @comment = Comment.new
-  #     @story = get_story
-  #   else
-  #     flash[:alert] = "Please log in to comment"
-  #     redirect_to stories_path
-  #   end
-  # end
-
   def create
     if user_signed_in?
       comment = Comment.new(comment_params)

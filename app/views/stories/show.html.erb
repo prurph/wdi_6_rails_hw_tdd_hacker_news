@@ -6,7 +6,7 @@
         comment: @comment } %>
 
   <ul>
-    <% @story.comments.each do |comment| %>
+    <% @story_comments.each do |comment| %>
       <li>
         <%= comment.user.username %> says: <%= comment.body %><br>
         <div class="btn-group">
