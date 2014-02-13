@@ -39,6 +39,7 @@ end
 
 # Other gems you may find useful for development
 group :development do
+  gem 'bullet'
   gem 'time_difference'
   gem 'better_errors'
   gem 'binding_of_caller'

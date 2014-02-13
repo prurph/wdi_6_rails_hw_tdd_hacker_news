@@ -7,7 +7,7 @@ class StoriesController < ApplicationController
   def show
     @story = get_story
     @comment = Comment.new
-    @story_comments = @story.comments.order(:created_at)
+    @story_comments = @story.comments.includes(:user, :votes).order(:created_at)
     @user_comm_vote = map_votable_to_user_votes(@story_comments)
   end
 
