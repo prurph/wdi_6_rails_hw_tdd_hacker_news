@@ -25,4 +25,10 @@ FactoryGirl.define do
     association :votable, factory: :story
     value   { [-1, 0, 1].shuffle.first }
   end
+
+  factory :comment_vote, class: Vote do
+    user
+    association :votable, factory: :comment
+    value   { [-1, 0, 1].shuffle.first }
+  end
 end

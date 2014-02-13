@@ -25,17 +25,12 @@ describe Story do
       before do
         40.times {
           story = create(:story)
-          allow(story).to receive(:hot).and_return(rand(1000))
+          create(:story_vote, votable: story, value: rand(1000))
         }
-
       end
       it 'should return 30 stories' do
         expect(Story.top_30.count).to eq(30)
       end
-
-      # it 'should return in order of hot ranking' do
-      #   expect(Story.top_30[1].hot).to be < (Story.top_30[25].hot)
-      # end
     end
   end
 end
