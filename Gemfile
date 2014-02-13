@@ -13,6 +13,7 @@ gem 'bootstrap-sass', '~>3.1.0'
 gem "flat-ui-rails"
 gem 'jquery-ui-rails'
 gem 'addressable'
+gem 'newrelic_rpm'
 
 # These are gems you may find useful for testing
 # I have NOT created configuration in the /spec directory for you
