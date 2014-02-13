@@ -1,16 +1,19 @@
 <nav class="navbar navbar-default">
   <ul class="nav nav-pills">
-    <li><%= link_to 'PCombinator', root_path, class: "title" %></li>
+    <li>
+      <%= link_to 'PCOMBINATOR', root_path, class: "brand" %>
+    </li>
     <% if user_signed_in? %>
-    <li><h6>Signed in as <%= current_user.email %></h6></li>
-      <li><%= link_to "Sign out", destroy_user_session_path,
-              { method: :delete, class: 'btn btn-primary' } %></li>
+      <li><%= link_to "Submit", new_story_path %></li>
+      <li><%= link_to "Sign out #{current_user.email}", destroy_user_session_path,
+              { method: :delete } %></li>
     <% else %>
-      <li><%= link_to "Sign in", new_user_session_path,
-              class: 'btn btn-primary' %></li>
-      <li><%= link_to "Sign up", new_user_registration_path,
-              class: 'btn btn-primary' %></li>
+      <li><%= link_to "Sign in", new_user_session_path %></li>
+      <li><%= link_to "Sign up", new_user_registration_path %></li>
     <% end %>
   </ul>
+  <div class="flash-msg">
+    <%= render 'layouts/flash_messages' %>
+  </div>
 </nav>
 

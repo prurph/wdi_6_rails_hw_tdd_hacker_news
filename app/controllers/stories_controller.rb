@@ -2,12 +2,6 @@ class StoriesController < ApplicationController
   def index
     @stories = Story.top_30
     @user_vote = map_votable_to_user_votes(@stories)
-    # if user_signed_in?
-    #   @user_vote = @stories.map {|story| story.user_voted_value(current_user.id)}
-    #   @user_vote.flatten!
-    # else
-    #   @user_vote = Array.new(30, 0)
-    # end
   end
 
   def show
@@ -15,15 +9,6 @@ class StoriesController < ApplicationController
     @comment = Comment.new
     @story_comments = @story.comments.order(:created_at)
     @user_comm_vote = map_votable_to_user_votes(@story_comments)
-    #@user_comm_vote = generate_user_comments
-    # if user_signed_in?
-    #   @user_comm_vote = @story_comments.map do |comment|
-    #     comment.user_voted_value(current_user.id)
-    #   end
-    #   @user_comm_vote.flatten!
-    # else
-    #   @user_comm_vote = Array.new(@story_comments.length, 0)
-    # end
   end
 
   def new

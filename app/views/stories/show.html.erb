@@ -1,20 +1,29 @@
 <div class="container">
-  <%= @story.title %> posted by <%= @story.user.username %>
-  <%= pluralize(@story.vote_score, 'point') %><br>
-  <h3>Join the discussion</h3>
-  <%= render partial: 'layouts/new_comment_form', locals: {story: @story,
-        comment: @comment } %>
-
+  <div class="top-stories">
+    <h2><%= link_to @story.title, url_for(@story.link),
+            target: "_blank"  %></h2>
+    <h3>Posted by <%= @story.user.username %></h3>
+  </div>
   <ul>
     <% @story_comments.each_with_index do |comment, index| %>
       <li>
-        <%= comment.user.username %> says: <%= comment.body %><br>
-        <div>
-          <%= render partial: 'layouts/upvote_downvote',
-                locals: { objs: [@story, comment], user_vote: @user_comm_vote[index] } %>
+        <%= render partial: 'layouts/upvote_downvote',
+            locals: {objs: [@story, comment], user_vote: @user_comm_vote[index] } %>
+        <div class="comment">
+          <%= comment.user.username %>
+          <span class="comment-time">
+            [<%= time_ago_in_words(comment.created_at) %> ago,
+             <%= pluralize(comment.vote_score, 'point') %>]
+          </span>
+          <p><%= comment.body %></p>
         </div>
-        <%= pluralize(comment.vote_score, 'point') %>
       </li>
     <% end %>
   </ul>
+  <div class="clear">
+    <h3>Join the discussion</h3>
+    <%= render partial: 'layouts/new_comment_form', locals: {story: @story,
+        comment: @comment } %>
+  </div>
 </div>
+

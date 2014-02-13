@@ -1,10 +1,10 @@
-<div class="btn-group">
-  <% if user_vote <= 0 %>
-    <%= link_to "", [objs, :upvote].flatten, { method: :post,
-          class: "btn btn-success vote glyphicon glyphicon-chevron-up" } %>
-  <% end %>
-  <% if user_vote >= 0 %>
-    <%= link_to "", [objs, :downvote].flatten, { method: :post,
-          class: "btn btn-danger vote glyphicon glyphicon-chevron-down" } %>
-  <% end %>
+<div class="up-down">
+    <% if user_vote <= 0 %>
+      <%= link_to "", [objs, :upvote].flatten, { method: :post,
+            class: "btn vote glyphicon glyphicon-chevron-up" } %>
+    <% end %>
+    <% if user_vote >= 0 %>
+      <%= link_to "", [objs, :downvote].flatten, { method: :post,
+            class: "btn vote glyphicon glyphicon-chevron-down" } %>
+    <% end %>
 </div>

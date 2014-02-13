@@ -22,7 +22,8 @@ class Story < ActiveRecord::Base
       y = -1
     end
 
-    Math.log([x.abs, 1].max, 10) + y * self.created_at.to_i / 45000
+    (Math.log([x.abs, 1].max, 10) + y * (self.created_at - Time.new(2005, 12, 8,
+      7, 46, 43)) / 45000).round
   end
 
   def self.top_30

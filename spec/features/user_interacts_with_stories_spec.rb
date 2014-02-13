@@ -12,11 +12,9 @@ feature 'Visitor views stories' do
     expect(page).to have_content("Top Stories")
 
     expect(page).to have_content(@story.title)
-    expect(page).to have_content(@story.description)
     expect(page).to have_link(@story.title, { href: @story.link } )
 
     expect(page).to have_content(@story2.title)
-    expect(page).to have_content(@story2.description)
     expect(page).to have_link(@story2.title, { href: @story2.link } )
   end
 
@@ -46,7 +44,6 @@ feature 'User takes action' do
       click_on "Submit article"
 
       expect(page).to have_content(story.title)
-      expect(page).to have_content(story.description)
       expect(page).to have_link(story.title, { href: story.link } )
     end
 
@@ -130,8 +127,7 @@ feature 'User takes action' do
     end
 
     scenario "user tries to submit article" do
-      click_on "Submit"
-      expect(page).to have_content("Please log in")
+      expect(page).to_not have_content("Submit")
     end
     scenario "user tries to comment" do
       first(".story").click_link("discuss")

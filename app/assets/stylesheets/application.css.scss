@@ -1,10 +1,153 @@
 @import "bootstrap";
 @import "flat-ui";
 
-ul {
-  list-style-type: none;
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #2C3E50;
 }
 
-.vote a {
+a {
+  text-decoration: none;
+  color: #2980B9;
+  -moz-transition: color 0.3s;
+  -webkit-transition: color 0.3s;
+  transform: color 0.3s;
+  &:hover {
+    color: #C0392B;
+  }
+}
+
+body {
+  background-color: #ECF0F1;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.top-stories {
+  margin-left: 30px;
+  margin-bottom: 10px;
+  h2 {
+    display: inline;
+    font-size: 35px;
+    margin-right: 20px;
+    color: #E67E22;
+  }
+}
+
+.vote {
+  background-color: transparent;
+}
+
+.outer-list > li {
+  height: 80px;
+  margin-top: 5px;
+}
+
+.up-down {
+  position: relative;
+  display: inline-block;
+  float: left;
+  margin-left: 20px;
+  margin-right: 10px;
+  height: 80px;
+  line-height: 40px;
+  width: 40px;
+}
+
+.title-desc {
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  a {
+    font-size: 24px;
+  }
+}
+
+.glyphicon-chevron-up {
+  opacity: 0.6;
+  color: #2ECC71;
+  &:hover {
+    color: white;
+    background-color: #2ECC71;
+  }
+}
+
+.glyphicon-chevron-down {
+  opacity: 0.6;
+  color: #E74C3C;
+  &:hover {
+    color: white;
+    background-color: #E74C3C;
+  }
+}
+
+.inner-list {
+  height: 30px;
+  margin-bottom: 10px;
+  li {
+    margin-right: 10px;
+  }
+}
+
+
+.story {
+  height: 80px;
+}
+
+.comment {
+  color: #3498DB;
+  min-height: 80px;
+  .comment-time {
+    margin-left: 20px;
+    font-size: 14px;
+  }
+  p {
+    font-size: 14px;
+  }
+}
+
+.comment {
+  font-size: 18px;
+  margin-left: 80px;
+}
+
+.clear {
+  clear: both;
+}
+
+.navbar .brand {
+    color: #D35400;
+}
+
+.nav-pills > li > a {
+  border-radius: 0px;
+}
+
+.flash-msg {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: inline-block;
+  height: 53px;
+  line-height: 53px;
+  margin-right: 20px;
+  color: #8E44AD;
+}
+
+.form-container {
+  width: 60%;
+  margin-bottom: 10px;
+  &.bigger {
+    width: 80%;
+  }
+}
+
+.display-none {
   display: none;
 }

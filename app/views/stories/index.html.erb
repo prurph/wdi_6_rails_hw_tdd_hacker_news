@@ -1,32 +1,27 @@
-<div class="container text-center">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1>Top Stories</h1>
-      <%= link_to "Submit", new_story_path %>
-    </div>
-  <div>
-  <div class="row">
-    <ul class="list-group">
-      <% @stories.each_with_index do |story, index| %>
-        <li class="story">
-          <div class="col col-lg-10">
-            <ul>
-              <li>
-                <%= link_to story.title, url_for(story.link), target: "_blank" %>
-                <%= story.description %>
-                <%= link_to "discuss (#{pluralize(story.comments.count, 'comment')})", story %>
-                <%= pluralize(story.vote_score, 'point') %>
-                <%= "#{story.hot} HOT SCORE" %>
-              </li>
-              <li>
-                <%# objs below allows same upvote/downvote for comment and articles %>
-                <%= render partial: 'layouts/upvote_downvote',
-                           locals: {objs: [story], user_vote: @user_vote[index] } %>
-              </li>
-            <ul>
-          </div>
-        </li>
-      <% end %>
-    </ul>
+<div class="container">
+  <div class="top-stories">
+    <h2>Top Stories</h2>
   </div>
+  <ul class="outer-list story">
+    <% @stories.each_with_index do |story, index| %>
+      <li>
+        <%= render partial: 'layouts/upvote_downvote',
+            locals: {objs: [story], user_vote: @user_vote[index] } %>
+        <div class="title-desc">
+          <%= link_to story.title, url_for(story.link), target: "_blank" %>
+        </div>
+        <div class="metadata">
+          <ul class="inner-list">
+            <li>
+              <%= link_to "discuss [#{pluralize(story.comments.count, 'comment')}]", story %>
+            </li>
+            <li>
+              <%= pluralize(story.vote_score, 'point') %>
+              <%#= "#{story.hot} Reddit Points" %>
+            </li>
+          </ul>
+        </div>
+      </li>
+    <% end %>
+  </ul>
 </div>

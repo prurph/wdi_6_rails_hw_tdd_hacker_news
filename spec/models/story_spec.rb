@@ -29,8 +29,10 @@ describe Story do
       end
     end
     describe '.top_30' do
+      before do
+        40.times { create(:story) }
+      end
       it 'should return 30 stories' do
-        35.times { create(:story) }
         expect(Story.top_30.count).to eq(30)
       end
     end

@@ -1,9 +1,7 @@
-<div class="container">
-  <%= form_for [@story, comment] do |f| %>
-  <div class="form-container">
-    <%= f.label :body, "Comment" %>
-    <%= f.text_area :body, class: 'form-control' %>
-    <%= f.submit "Comment!", class: "btn btn-blue" %>
-  </div>
-  <% end %>
+<%= form_for [@story, comment] do |f| %>
+<div class="form-container bigger">
+  <%= f.label :body, "Comment", class: "display-none" %>
+  <%= f.text_area :body, class: 'form-control', cols: "50", rows: "10" %>
 </div>
+  <%= f.submit "Comment!", class: "btn btn-blue" %>
+<% end %>
