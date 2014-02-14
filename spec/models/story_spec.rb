@@ -23,13 +23,19 @@ describe Story do
     end
     describe '.top_30' do
       before do
-        40.times {
-          story = create(:story)
-          create(:story_vote, votable: story, value: rand(1000))
-        }
+        # Make some random stories at random times with random vote values
+        40.times do
+          story = create(:story, created_at: (Time.now + rand(-10000..10000)))
+          create(:story_vote, votable: story, value: rand(-1000..1000))
+        end
       end
       it 'should return 30 stories' do
         expect(Story.top_30.count).to eq(30)
+      end
+      it 'should sort them by #hot ranking' do
+        top_30 = Story.top_30
+        expect(top_30.first.hot).to be > (top_30.last.hot)
+        expect(top_30.first.hot).to be > (top_30[2].hot)
       end
     end
   end

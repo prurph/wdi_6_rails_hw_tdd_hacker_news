@@ -22,13 +22,13 @@ class Story < ActiveRecord::Base
       y = -1
     end
 
-    (Math.log([x.abs, 1].max, 10) + y * (self.created_at - Time.new(2005, 12, 8,
-      7, 46, 43)) / 45000).round
+    45000*(Math.log([x.abs, 1].max, 10)) + y * (self.created_at - Time.new(2005, 12, 8,
+      7, 46, 43))
   end
 
   def self.top_30
     Rails.cache.fetch("top_30", expires_in: 5.minutes) do
-      return self.sort_by(&:hot).reverse[0,30]
+      return all.sort_by(&:hot).reverse[0,30]
     end
   end
 
