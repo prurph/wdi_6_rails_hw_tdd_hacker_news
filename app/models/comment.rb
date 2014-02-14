@@ -5,7 +5,7 @@ class Comment < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :story
-  has_many :votes, as: :votable
+  has_many :votes, as: :votable, dependent: :destroy
 
   def vote_score
     blk = lambda {|vote| vote.value}

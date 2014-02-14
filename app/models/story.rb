@@ -4,8 +4,8 @@ class Story < ActiveRecord::Base
   validates :link, uniqueness: true, uri: true
 
   belongs_to :user
-  has_many :comments
-  has_many :votes, as: :votable
+  has_many :comments, dependent: :destroy
+  has_many :votes, as: :votable, dependent: :destroy
 
   def vote_score
     blk = lambda { |vote| vote.value }
@@ -28,7 +28,7 @@ class Story < ActiveRecord::Base
 
   def self.top_30
     Rails.cache.fetch("top_30", expires_in: 5.minutes) do
-      return self.includes(:votes).sort_by(&:hot).reverse[0,30]
+      return self.sort_by(&:hot).reverse[0,30]
     end
   end
 
