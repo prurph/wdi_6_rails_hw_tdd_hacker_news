@@ -1,6 +1,6 @@
 class StoriesController < ApplicationController
   def index
-    @stories = Story.top_30
+    @stories = Story.includes(:votes).top_30
     @user_vote = map_votable_to_user_votes(@stories)
   end
 

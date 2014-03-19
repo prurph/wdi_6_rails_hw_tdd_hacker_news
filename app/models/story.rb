@@ -6,6 +6,7 @@ class Story < ActiveRecord::Base
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :votes, as: :votable, dependent: :destroy
+  delegate :username, to: :user
 
   def vote_score
     blk = lambda { |vote| vote.value }

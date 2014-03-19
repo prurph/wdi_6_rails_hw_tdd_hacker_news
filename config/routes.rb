@@ -12,9 +12,8 @@ HackerNews::Application.routes.draw do
   post '/stories/:story_id/comments/:comment_id/downvote', as: 'story_comment_downvote',
     to: 'votes#downvote', defaults: {votable: 'comment', value: -1 }
 
-  resources :stories do
-    resources :comments do
-    end
+  resources :stories, except: [:edit, :update, :destroy] do
+    resources :comments, only: [:create]
   end
 
   root 'stories#index'
